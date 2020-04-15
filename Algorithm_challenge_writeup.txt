@@ -1,0 +1,130 @@
+The Freecodecamp intermediate algorithm challenge is one of the challenge that in FCC curriculum,
+this challenge will prepare an individual to complete the final challenge for the JavaScript Algorithm
+and Data structure certificatio.
+
+    I will be writing and explaining my solution for proper documentation
+
+Question 1 of FCC intermediate Algorithm challenge: Sum All Numbers in a Range
+
+    We'll pass you an array of two numbers. Return the sum of those two numbers plus the sum of all the 
+    numbers between them. The lowest number will not always come first.
+
+solution:
+
+ So according to the challenge we will be provided with an array with two number, and will be required
+ to write a function that will sum those two numbers and all numbers between them. also the numbers can
+ come in any order.
+     Here is my solution:
+
+        function sumAll(arr) {
+            arr.sort((a, b) => a - b);
+            let sumarr = 0;
+            for (let i = arr[0]; i <= arr[1]; i++){
+                sumarr = sumarr + i
+             }
+            return sumarr;
+        }
+
+        sumAll([1, 4]);
+
+    Explaination:
+
+        First we need to sort the other of the array to make it easy to iterate over  the numbers from a lowest number
+        to the highest, the sort() method that accept the comparism function does the sorting of the number.
+        the for accept the lowest number as the first value and the highest number as the last value. on each iteration
+        the value are added to the variable sumarr and the function return the final value of sumarr.
+
+Question 2 of FCC intermediate Algorithm challenge: Diff Two Arrays
+
+    Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both. 
+    In other words, return the symmetric difference of the two arrays.
+
+Solution:
+    Here we ask to comare the content of two arrays and extract the item that are not common between both arrays, that
+    is what is in array1 that is not in array2 and vice versa
+        
+        Here is my first solution:
+
+            function diffArray(arr1, arr2) {
+                var newArr = [];
+                for (let i = 0; i < arr2.length; i++){
+                    if(arr1.includes(arr2[i])=== false){
+                        newArr.push(arr2[i])
+                        }
+                    }
+                for (let i = 0; i < arr1.length; i++){
+                    if(arr2.includes(arr1[i]) === false){
+                        newArr.push(arr1[i])
+                        }
+                    } 
+                return newArr
+            }
+        Explaination:
+
+            Thinking about the problem, we have two arrays to compare and extract the items are that are not common
+            we need to compare the array1 with array2 and extract element in array1 not find in array2 and append it 
+            to the empty array declared. to solve this problem I make use of for loop to iterate over the content of 
+            an array, compared each element with element in the second array using the includes() method.
+            The first for loop iterate over the element in array2 and the if conditional compared that with the 
+            element in array1. if element is found in array2 that is not in array then that element is pushed to the newArr
+            The second for loop did the same thing as explained above but these time we iterate over the array1 and if conditional
+            statement compared the element in array1 that is not in array2 and then push the element to the newArr.
+
+        Here is my second solution:
+            We going to make use of new function and do and array parameter swap when we call the function inside of the main
+            function.
+
+                function diffArray(arr1, arr2) {
+                    var newArr = []
+                    function arraySwap(array1, array2){
+                        for(let i = 0; i< array1.length; i++){
+                            if(array2.includes(array1[i]) === false){
+                                newArr.push(array1[i])
+                            } 
+                        }
+                    }
+                    arraySwap(arr1, arr2)
+                    arraySwap(arr2, arr1)
+                    return newArr
+                }
+
+        Explaination:
+
+            This solution allows you to remove the redudancy of using to for loop by calling the function that accept 
+            the array in any order twice within the function. note that arr1 in the first arraySwap function call is array1
+            while arr2 in the second arraySwap call becomes array1
+ 
+Question 3 of FCC intermediate Algorithm challenge: Seek and Destroy
+    You will be provided with an initial array (the first argument in the destroyer function), followed by one or more arguments. 
+    Remove all elements from the initial array that are of the same value as these arguments.
+
+Solution:
+    Here we asked to write a function that compares an array(first argument in the function) with other arguments of the function
+    and delete only the element that are common in the array and the other argument
+     Here is my solution:
+
+        function destroyer(arr) {
+            let newArr = []
+            let argumentsVal = []
+            for(let i = 1; i <arguments.length; i++){
+                argumentsVal.push(arguments[i])
+                }
+            for (let i = 0; i < arr.length; i++){
+                 if(argumentsVal.includes(arr[i]) === false){
+                    newArr.push(arr[i])
+                    }
+                }
+            return newArr
+            }
+
+    Explaination:
+
+        Now the arguments in a function are stored in form of array, for example let say we have a function name
+        func1([1,2, 3, 4],3, 4) now function func1 has the argument stored in the function like [[1, 2, 3, 4], 3, 4]. so from the
+        question the index position 0 is for the array and the index position 1 till the end of the argument is for the 
+        remaining argument. we declared two new array called newArr and argumentsVal, the newArr will be used to store element
+        not in the argument from index 1 to the end. The first for loop iterate over the argument in the function starting
+        at index 1 and push the value of the argument at each index into the argumentsVal array.
+        The second for loop is used to compare the element in the arr array with element in the argumentsVal array and store 
+        the element not common in both array inside newArr and newArr will be returne. forexample the func1([1, 2,3, 4] 3, 4)
+        will return the array [1, 2]
