@@ -128,3 +128,73 @@ Solution:
         The second for loop is used to compare the element in the arr array with element in the argumentsVal array and store 
         the element not common in both array inside newArr and newArr will be returne. forexample the func1([1, 2,3, 4] 3, 4)
         will return the array [1, 2]
+
+Question 4 of FCC intermediate Algorithm challenge: Pig Latin
+
+    Pig Latin is a way of altering English Words. The rules are as follows:
+
+    - If a word begins with a consonant, take the first consonant or consonant cluster, move it to the end of the word,
+      and add "ay" to it.
+    - If a word begins with a vowel, just add "way" at the end.
+
+    Solution:
+
+        Here we ask to write a function that accept a word and we can alter that word base the specification above.
+
+            function translatePigLatin(str) {
+                let arr = str.split('')
+                let vowelreg = /[aieou]/gi
+                if(arr[0].match(vowelreg)){
+                     return arr.join('') + 'way'
+                     }
+                else {
+                    return str.replace(/([^aieou]+)(.*)/gi, '$2$1')+ 'ay'
+                    }
+                }
+
+    Explaination:
+        We declare a function called translatePigLatin, the function accept a string parameter called str.
+        we also declared an array called arr and then we split the str into character using the split method, this character
+        are stored in the array arr. then we create a RegEx to check if a character at the beginning of word is a vowel, if 
+        the character is a vowel, we then join all character in the array and add the string 'way' to it end, otherwise, if the 
+        first character is not an array we use the replace method and the RegEx "/([^aieou]+)(.*)/gi, '$2$1')" to group all
+        character before the first vowel(([^aieou]+)) store it in $1 and and every character from the vowel to end(.*) store it 
+        in the $2 and add both together and then the replace method replaces the str with value of '$2$1' and then 'ay' is added 
+        to it.
+
+Question 5 of FCC intermediate Algorithm challenge: Search and replace
+    
+    Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+    Solution:
+        
+        We ask to write a function that takes three arguments, the first argument a sentence, the second and third
+        argument are words. the function search through the first argument(sentence) and check if the second argument 
+        is present, if it is, then it replace the second argument with the third. also it check if the second argument 
+        first character is captilize and thus captilize the first character of the third argument.
+
+            function myReplace(str, before, after) {
+                let arrStr = str.split(" ")
+                for(let i = 0; i < arrStr.length; i++){
+                if(before === arrStr[i]){
+                    if(arrStr[i].charAt(0).match(/([A-Z])+/)){
+                        let val = after.charAt(0).toUpperCase() + after.slice(1)
+                        arrStr[i] = val
+                         }
+                    else{
+                        arrStr[i] = after
+                         }
+
+                        }
+                    }
+                return arrStr.join(' ');
+                }
+
+    Explaination:
+
+        First we declared a variable called arrStr, and then we split the first argument into array of string and stored
+        them in the arrStr, then we iterate over the array of string and check if there is any word that is eqaul to the 
+        second argument, if that word exist then we check the first character of the string using the charAt method to See
+        if the word has a captilize first character, this is done using the RegEx "/([A-Z])+/". once we satisfy all the
+        condition when then replace the word with the third argument and use the join method to convert back the array 
+        sentence.
